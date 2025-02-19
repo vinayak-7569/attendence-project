@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Tracker with Memes & Music</title>
+    <link rel="stylesheet" href="attendence.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Attendance Tracker</h2>
+
+        <button onclick="markAttendance('full')">Full Day Present</button>
+        <button onclick="markAttendance('half')">Half Day Present</button>
+        <button onclick="markAttendance('absent')">Absent</button>
+
+        <h3>Total Classes: <span id="totalClasses">0</span></h3>
+        <h3>Full-Day Present: <span id="fullDay">0</span></h3>
+        <h3>Half-Day Present: <span id="halfDay">0</span></h3>
+        <h3>Absent: <span id="absentCount">0</span></h3>
+        <h3>Attendance Percentage: <span id="attendancePercentage">0%</span></h3>
+        <h3>Change in Percentage: <span id="changeInPercentage">0%</span></h3>
+        <h3>Status: <span id="status">Not Meeting Requirement</span></h3>
+
+        <div id="memeContainer">
+            <img id="memeImage" src="" alt="Meme will appear here" style="max-width: 100%; display: none;">
+        </div>
+
+        <audio id="audioPlayer" loop></audio>
+    </div>
+
+    <script>
+        let totalClasses = 0;
+        let fullDayPresent = 0;
+        let halfDayPresent = 0;
+        let absentCount = 0;
+        const requiredAttendancePercentage = 75;
+        let previousPercentage = 0;
+
+        function markAttendance(type) {
+            totalClasses++;
+
+            if (type === 'full') fullDayPresent++;
+            if (type === 'half') halfDayPresent++;
+            if (type === 'absent') absentCount++;
+
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let effectiveAttendance = fullDayPresent + (halfDayPresent * 0.5);
+            let attendancePercentage = (effectiveAttendance / totalClasses) * 100 || 0;
+            
+            let status = attendancePercentage >= requiredAttendancePercentage ? "Meeting Requirement" : "Not Meeting Requirement";
+
+            let percentageChange = attendancePercentage - previousPercentage;
+            previousPercentage = attendancePercentage;
+
+            document.getElementById("totalClasses").innerText = totalClasses;
+            document.getElementById("fullDay").innerText = fullDayPresent;
+            document.getElementById("halfDay").innerText = halfDayPresent;
+            document.getElementById("absentCount").innerText = absentCount;
+            document.getElementById("attendancePercentage").innerText = attendancePercentage.toFixed(2) + "%";
+            document.getElementById("changeInPercentage").innerText = percentageChange.toFixed(2) + "%";
+            document.getElementById("status").innerText = status;
+
+            updateMemeAndMusic(attendancePercentage);
+        }
+
+        function updateMemeAndMusic(attendancePercentage) {
+            let memeImage = document.getElementById("memeImage");
+            let audioPlayer = document.getElementById("audioPlayer");
+            
+            if (attendancePercentage >= requiredAttendancePercentage) {
+                memeImage.src = "https://media1.tenor.com/m/HvJ9tWZqeqoAAAAd/adhurs-sunil.gif"; // Default Success Meme
+                audioPlayer.src = "success.mp3"; // Add path to success music file
+            } else {
+                memeImage.src = "https://media1.tenor.com/m/HGALJiedOCgAAAAd/brahmanandam-brahmi.gif"; // Default Failure Meme
+                audioPlayer.src = ""; // Add path to failure music file
+            }
+            
+            memeImage.style.display = 'block';
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>

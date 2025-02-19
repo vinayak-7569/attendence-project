@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    animation: fadeInBody 1s ease-in;
+}
+
+@keyframes fadeInBody {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 450px;
+    max-width: 90%;
+    animation: fadeInContainer 1s ease-in-out;
+}
+
+@keyframes fadeInContainer {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #555;
+    animation: fadeInText 1s ease-in-out;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+h3 span {
+    font-weight: bold;
+}
+
+#memeContainer {
+    margin-top: 20px;
+    animation: fadeInMeme 1s ease-in-out;
+}
+
+@keyframes fadeInMeme {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#memeImage {
+    max-width: 100%;
+    border-radius: 8px;
+    transition: transform 0.5s ease;
+}
+
+#memeImage:hover {
+    transform: scale(1.05);
+}
+
+#status {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #d9534f;
+    animation: fadeInStatus 1s ease-in-out;
+}
+
+@keyframes fadeInStatus {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#status.Meeting {
+    color: #5bc0de;
+    font-weight: bold;
+}
+
+#audioPlayer {
+    display: none;
+}
+
+/* New Animations */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(72, 172, 45, 0.7);
+}
+
+h3 span {
+    color: #4CAF50;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+h2, h3 {
+    transition: color 0.3s ease;
+}
+
+h2:hover, h3:hover {
+    color: #4CAF50;
+}
+
+/* Smooth transition when status changes */
+#status {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#status.Meeting {
+    transform: scale(1.05);
+}
+
+#status.Not.Meeting {
+    transform: scale(0.95);
+}
